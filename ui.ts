@@ -49,6 +49,17 @@ export function renderPostForm(
 }
 
 /**
+ * 投稿フォームを削除します。
+ */
+export function removePostForm(
+  formId = DEFAULT_FORM_ID,
+) {
+  const form = document.querySelector(formId);
+  if (form === null) return;
+  form.remove();
+}
+
+/**
  * CSSを適用します。
  */
 export function enableCSS(cssSrc: string) {
