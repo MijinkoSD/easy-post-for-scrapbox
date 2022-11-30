@@ -42,6 +42,7 @@ export function renderPostForm(
     );
     textarea.disabled = false;
     sendButton.disabled = false;
+    textarea.value = "";
   };
   root.append(textarea, sendButton);
   parent.prepend(root);
