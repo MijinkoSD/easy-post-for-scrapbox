@@ -4,7 +4,6 @@
 /// <reference lib="dom.iterable"/>
 
 import { Scrapbox } from "https://raw.githubusercontent.com/scrapbox-jp/types/0.3.6/userscript.ts";
-import { sleep } from "https://raw.githubusercontent.com/takker99/scrapbox-userscript-std/0.14.10/sleep.ts";
 declare const scrapbox: Scrapbox;
 
 import { NoMatchSelectorError } from "./exception.ts";
@@ -88,7 +87,7 @@ export function enableCSS(cssSrc: string) {
 /**
  * CSSを無効化します。
  */
-export function removeCSS(cssSrc: string) {
+export function disableCSS(cssSrc: string) {
   const existLinks = document.head.getElementsByTagName("link");
   for (const i in existLinks) {
     if (existLinks[i].getAttribute("href") == cssSrc) {
