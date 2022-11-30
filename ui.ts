@@ -16,6 +16,8 @@ import { DEFAULT_FORM_ID } from "./setting.ts";
  * @param {string} [formId=DEFAULT_FORM_ID] 投稿フォームのDOMに設定するID属性の値。
  */
 export function renderPostForm(
+  postToProjectName = scrapbox.Project.name,
+  postToPageTitle = scrapbox.Page.title,
   formId = DEFAULT_FORM_ID,
 ) {
   const parent = document.querySelector(".app .row-flex");
@@ -26,14 +28,14 @@ export function renderPostForm(
   const sendButton = document.createElement("button");
   sendButton.textContent = "送信";
   sendButton.onclick = () => {
-    if (scrapbox.Page.title === null) return;
+    if (postToPageTitle === null) return;
     postText(
       {
         text: [textarea.value],
         title: dateToString(Date.now()),
       },
-      scrapbox.Project.name,
-      scrapbox.Page.title,
+      postToProjectName,
+      postToPageTitle,
     );
   };
   root.append(textarea, sendButton);
