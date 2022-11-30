@@ -54,6 +54,7 @@ export function renderPostForm(
       break;
     }
   }
+  textarea.focus();
 }
 
 /**
