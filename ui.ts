@@ -15,11 +15,10 @@ import { DEFAULT_FORM_ID } from "./setting.ts";
  * @param {string} [formId=DEFAULT_FORM_ID] 投稿フォームのDOMに設定するID属性の値。
  */
 export function renderPostForm(
-  parentDOMSelector = ".app .row-flex",
   formId = DEFAULT_FORM_ID,
 ) {
-  const parent = document.querySelector(parentDOMSelector);
-  if (parent === null) throw new NoMatchSelectorError(parentDOMSelector);
+  const parent = document.querySelector(".app .row-flex");
+  if (parent === null) throw new NoMatchSelectorError(".app .row-flex");
   const root = document.createElement("div");
   root.id = formId;
   const textarea = document.createElement("textarea");
