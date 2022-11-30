@@ -62,7 +62,7 @@ export function renderPostForm(
 export function removePostForm(
   formId = DEFAULT_FORM_ID,
 ) {
-  const form = document.querySelector(formId);
+  const form = document.querySelector("#" + formId);
   if (form === null) return;
   form.remove();
 }
