@@ -89,9 +89,9 @@ export function enableCSS(cssSrc: string) {
  */
 export function disableCSS(cssSrc: string) {
   const existLinks = document.head.getElementsByTagName("link");
-  for (const i in existLinks) {
-    if (existLinks[i].getAttribute("href") == cssSrc) {
-      existLinks[i].remove();
+  for (const el of existLinks) {
+    if (el.getAttribute("href") == cssSrc) {
+      el.remove();
     }
   }
 }
