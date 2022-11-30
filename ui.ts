@@ -53,8 +53,8 @@ export function renderPostForm(
  */
 export function enableCSS(cssSrc: string) {
   const existLinks = document.head.getElementsByTagName("link");
-  for (const i in existLinks) {
-    if (existLinks[i].getAttribute("href") == cssSrc) {
+  for (const el of existLinks) {
+    if (el.getAttribute("href") == cssSrc) {
       return;
     }
   }
