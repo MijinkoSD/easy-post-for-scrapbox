@@ -1,1 +1,22 @@
-/*# sourceMappingURL=ui.css.map */
+div.col-page {
+  display: none;
+}
+
+#easy-post-for-scrapbox {
+  display: flex;
+  margin: 1em 2em;
+  gap: 0.5em;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 15px;
+}
+#easy-post-for-scrapbox textarea {
+  min-height: 5em;
+  width: 100%;
+}
+#easy-post-for-scrapbox button {
+  width: 6em;
+  height: 3em;
+}/*# sourceMappingURL=ui.css.map */
