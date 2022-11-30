@@ -1,6 +1,7 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="es2022"/>
 /// <reference lib="dom"/>
+/// <reference lib="dom.iterable"/>
 
 import { Scrapbox } from "https://raw.githubusercontent.com/scrapbox-jp/types/0.3.6/userscript.ts";
 declare const scrapbox: Scrapbox;
@@ -36,7 +37,15 @@ export function renderPostForm(
     );
   };
   root.append(textarea, sendButton);
-  parent.appendChild(root);
+  parent.prepend(root);
+  const parentsUnderNodes = parent.children;
+  for (const node of parentsUnderNodes) {
+    // .col-page-sideの順番を先頭に持ってくる
+    if (node.className == "col-page-side") {
+      parent.prepend(node);
+      break;
+    }
+  }
 }
 
 /**
