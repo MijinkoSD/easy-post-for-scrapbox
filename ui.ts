@@ -4,6 +4,7 @@
 /// <reference lib="dom.iterable"/>
 
 import { Scrapbox } from "https://raw.githubusercontent.com/scrapbox-jp/types/0.3.6/userscript.ts";
+import { sleep } from "https://raw.githubusercontent.com/takker99/scrapbox-userscript-std/0.14.10/sleep.ts";
 declare const scrapbox: Scrapbox;
 
 import { NoMatchSelectorError } from "./exception.ts";
@@ -27,9 +28,11 @@ export function renderPostForm(
   const textarea = document.createElement("textarea");
   const sendButton = document.createElement("button");
   sendButton.textContent = "送信";
-  sendButton.onclick = () => {
+  sendButton.onclick = async () => {
     if (postToPageTitle === null) return;
-    postText(
+    textarea.disabled = true;
+    sendButton.disabled = true;
+    await postText(
       {
         text: [textarea.value],
         title: dateToString(Date.now()),
@@ -37,6 +40,8 @@ export function renderPostForm(
       postToProjectName,
       postToPageTitle,
     );
+    textarea.disabled = false;
+    sendButton.disabled = false;
   };
   root.append(textarea, sendButton);
   parent.prepend(root);
