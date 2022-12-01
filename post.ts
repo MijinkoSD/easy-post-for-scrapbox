@@ -62,7 +62,7 @@ export async function postText(
  * WebSocketの接続を開始します。 \
  * 接続以降は自動的にそのソケットを使用します。
  *
- * @param {Socket} [socket] 使用するsocket（指定しない場合は自動的に接続を開始します）
+ * @param {Socket} [socket] 使用するsocket（指定しない場合は自動的に新しいsocketで接続を開始します）
  */
 export async function connectWebSocket(socket?: Socket): Promise<Socket> {
   if (socket !== undefined) {
