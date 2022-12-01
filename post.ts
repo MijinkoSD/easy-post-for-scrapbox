@@ -34,7 +34,7 @@ export async function postText(
   ];
   for (const text of addText.text) {
     for (const lineText of text.split(/\n/g)) {
-      addTextStrings.push(lineText);
+      addTextStrings.push(lineText.replace(/^>*(.*)/, "$1"));
     }
   }
   addTextStrings.push(""); // 空行を挿入する
