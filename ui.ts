@@ -26,7 +26,8 @@ export function renderPostForm(
   const textarea = document.createElement("textarea");
   const sendButton = document.createElement("button");
   sendButton.textContent = "送信";
-  sendButton.onclick = async () => {
+  /** 送信ボタンを押した時の挙動 */
+  const sendFunction = async () => {
     if (postToPageTitle === null) return;
     textarea.disabled = true;
     sendButton.disabled = true;
@@ -42,6 +43,14 @@ export function renderPostForm(
     sendButton.disabled = false;
     textarea.value = "";
   };
+  sendButton.onclick = sendFunction;
+  /** Ctrl+Enterでも送信できるようにする */
+  textarea.addEventListener("keydown", async (e) => {
+    if (
+      e.key === "Enter" && e.ctrlKey && !e.shiftKey && !e.altKey && !e.metaKey
+    ) await sendFunction();
+    textarea.focus();
+  });
   root.append(textarea, sendButton);
   parent.prepend(root);
   const parentsUnderNodes = parent.children;
