@@ -1,7 +1,7 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="es2022"/>
 
-import ExtensibleCustomError from "https://esm.sh/extensible-custom-error@0.0.7";
+import ExtensibleCustomError from "./deps/extensible-custom-error.ts";
 
 export class NoMatchSelectorError extends ExtensibleCustomError {
   constructor(selector?: string, error?: Error);

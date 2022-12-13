@@ -2,11 +2,11 @@
 /// <reference lib="es2022"/>
 
 import {
+  Line,
   makeSocket,
   patch,
   Socket,
-} from "https://raw.githubusercontent.com/takker99/scrapbox-userscript-std/0.14.10/mod.ts";
-import { Line } from "https://raw.githubusercontent.com/takker99/scrapbox-userscript-std/0.14.10/deps/scrapbox-rest.ts";
+} from "./deps/scrapbox-userscript-std.ts";
 
 /** 前回使用したSocket（未使用の場合はundefined） */
 let beforeSocket: Socket | undefined = undefined;

@@ -3,8 +3,7 @@
 /// <reference lib="dom"/>
 /// <reference lib="dom.iterable"/>
 
-import { Scrapbox } from "https://raw.githubusercontent.com/scrapbox-jp/types/0.3.6/userscript.ts";
-declare const scrapbox: Scrapbox;
+import { scrapbox } from "./deps/scrapbox.ts";
 
 import { NoMatchSelectorError } from "./exception.ts";
 import { postText } from "./post.ts";
