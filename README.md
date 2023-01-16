@@ -6,7 +6,7 @@ UserScriptで動作する簡易投稿フォームを表示します。
 
 ## 使い方の例
 以下の例では、投稿フォームを描画してメッセージを送信できるようにします。 \
-- `v0.2.1`のスクリプトを使用しています。
+- `v0.3.0`のスクリプトを使用しています。
 - 書いた後は`deno bundle`コマンドを使用してコンパイルしてください。
 ```ts
 /// <reference no-default-lib="true"/>
@@ -19,7 +19,7 @@ import {
   connectWebSocket,
   removePostForm,
   renderPostForm,
-} from "https://raw.githubusercontent.com/MijinkoSD/easy-post-for-scrapbox/v0.2.1/mod.ts";
+} from "https://raw.githubusercontent.com/MijinkoSD/easy-post-for-scrapbox/v0.3.0/mod.ts";
 
 // ------------
 //     設定
