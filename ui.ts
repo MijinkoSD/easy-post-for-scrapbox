@@ -121,8 +121,8 @@ function dateToString(
   })();
   const d = {
     year: zeroPadding(dateObj.getFullYear(), 4),
-    month: zeroPadding(dateObj.getMonth(), 2),
-    day: zeroPadding(dateObj.getDay(), 2),
+    month: zeroPadding(dateObj.getMonth()+1, 2),
+    day: zeroPadding(dateObj.getDate(), 2),
     hour: zeroPadding(dateObj.getHours(), 2),
     minute: zeroPadding(dateObj.getMinutes(), 2),
     second: zeroPadding(dateObj.getSeconds(), 2),
