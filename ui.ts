@@ -4,21 +4,56 @@
 /// <reference lib="dom.iterable"/>
 
 import { scrapbox } from "./deps/scrapbox.ts";
+import { Style as CSSStyle, toCSSText } from "./deps/array2cssText.ts";
 
 import { NoMatchSelectorError } from "./exception.ts";
 import { postText } from "./post.ts";
 import { DEFAULT_FORM_ID } from "./setting.ts";
+import { rawStyle } from "./style.ts";
+
+export interface RenderPostFormOpions {
+  /** 投稿フォームのDOMに設定するID属性の値 */
+  formId?: string;
+  /** CSS形式のスタイル */
+  cssStyle?: CSSStyle;
+}
+
+/** renderPostForm()のoptions引数のデフォルト値 */
+const defaultRenderPostFormOpions: Required<RenderPostFormOpions> = {
+  formId: DEFAULT_FORM_ID,
+  cssStyle: rawStyle,
+};
 
 /**
  * 投稿フォームを描画します。
- * @param {string} [parentDOMSelector="app row-flex"] UIの親となるDOMを指定する際に使用するセレクターを指定します。
- * @param {string} [formId=DEFAULT_FORM_ID] 投稿フォームのDOMに設定するID属性の値。
+ * @param {string} [postToProjectName=scrapbox.Project.name] 描画先のプロジェクト名
+ * @param {string} [postToPageTitle=scrapbox.Page.title] 描画先のページタイトル
+ * @param {RenderPostFormOpions} [options=defaultRenderPostFormOpions] その他のオプション
+ *
+ *   元々の第3引数は`formId`だったため`options`にはstring型の値も設定できるようになっていますが、
+ *   あくまで互換性の為に残されている機能なので、string型の値を渡すこと自体は**非推奨**です。 \
+ *   この互換機能は将来のメジャーアップデートにて削除されます。
  */
 export function renderPostForm(
   postToProjectName = scrapbox.Project.name,
   postToPageTitle = scrapbox.Page.title,
-  formId = DEFAULT_FORM_ID,
+  options?: RenderPostFormOpions | string,
 ) {
+  /**
+   * 第3引数の互換性を維持するための関数。 \
+   * 将来のメジャーアップデートで削除する。
+   */
+  function getOptions(): Required<RenderPostFormOpions> {
+    if (typeof options === "string") {
+      return { ...defaultRenderPostFormOpions, formId: options };
+    } else if (options?.formId === undefined) {
+      return defaultRenderPostFormOpions;
+    } else {
+      return { ...defaultRenderPostFormOpions, ...options };
+    }
+  }
+  const { formId, cssStyle } = getOptions();
+
   const parent = document.querySelector(".app .row-flex");
   if (parent === null) throw new NoMatchSelectorError(".app .row-flex");
   const root = document.createElement("div");
@@ -51,7 +86,9 @@ export function renderPostForm(
     ) await sendFunction();
     textarea.focus();
   });
-  root.append(textarea, sendButton);
+  const style = document.createElement("style");
+  style.textContent = toCSSText(cssStyle);
+  root.append(textarea, sendButton, style);
   parent.prepend(root);
   const parentsUnderNodes = parent.children;
   for (const node of parentsUnderNodes) {
@@ -75,8 +112,9 @@ export function removePostForm(
   form.remove();
 }
 
-/**
- * CSSを適用します。
+/** @deprecated
+ * URLを指定してCSSを適用します。 \
+ * 現在は不要です。
  */
 export function enableCSS(cssSrc: string) {
   const existLinks = document.head.getElementsByTagName("link");
@@ -92,8 +130,9 @@ export function enableCSS(cssSrc: string) {
   document.head.appendChild(link);
 }
 
-/**
- * CSSを無効化します。
+/** @deprecated
+ * URLを指定してCSSを無効化します。 \
+ * 現在は不要です。
  */
 export function disableCSS(cssSrc: string) {
   const existLinks = document.head.getElementsByTagName("link");
@@ -121,7 +160,7 @@ function dateToString(
   })();
   const d = {
     year: zeroPadding(dateObj.getFullYear(), 4),
-    month: zeroPadding(dateObj.getMonth()+1, 2),
+    month: zeroPadding(dateObj.getMonth() + 1, 2),
     day: zeroPadding(dateObj.getDate(), 2),
     hour: zeroPadding(dateObj.getHours(), 2),
     minute: zeroPadding(dateObj.getMinutes(), 2),

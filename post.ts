@@ -23,7 +23,7 @@ export async function postText(
   pageTitle: string,
   socket?: Socket,
 ) {
-  const title = (addText.title === undefined ? "" : addText.title);
+  const title = addText.title === undefined ? "" : addText.title;
   if (!addText.text.some((t) => !/^\s*$/.test(t))) {
     // 空白しか無かった場合は送信をキャンセルする
     // socketの更新も行わない
