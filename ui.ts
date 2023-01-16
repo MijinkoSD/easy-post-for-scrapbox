@@ -14,7 +14,7 @@ import { rawStyle } from "./style.ts";
 export interface RenderPostFormOpions {
   /** 投稿フォームのDOMに設定するID属性の値 */
   formId?: string;
-  /** CSS形式のスタイル */
+  /** style要素に設定するスタイル */
   cssStyle?: CSSStyle;
 }
 
