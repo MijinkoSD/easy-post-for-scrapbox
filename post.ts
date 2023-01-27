@@ -48,7 +48,7 @@ export async function postText(
     }
     return texts;
   };
-  patch(
+  await patch(
     projectName,
     pageTitle,
     update,
